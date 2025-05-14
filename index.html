@@ -10,19 +10,45 @@
       padding: 20px;
       max-width: 400px;
       margin: auto;
-      background-color: #fce4ec; /* Light pink background */
+      background-color: #fce4ec;
     }
 
     header, footer {
-      text-align: center;
-      padding: 10px 0;
       background-color: #e1bee7;
       border-radius: 5px;
+      padding: 10px;
       margin-bottom: 20px;
       position: relative;
     }
 
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 10px;
+    }
+
+    .header-content {
+      flex: 1;
+    }
+
+    .bunny-img {
+      height: 100px;
+      width: 100px;
+      object-fit: contain;
+      mix-blend-mode: multiply;
+  background-color: transparent;
+    }
+    .rabbit-img {
+      height: 100px;
+      width: 100px;
+      object-fit: contain;
+      mix-blend-mode: multiply;
+  background-color: transparent;
+    }
+
     footer {
+      text-align: center;
       margin-top: 30px;
       font-size: 14px;
       color: #555;
@@ -52,42 +78,29 @@
       cursor: pointer;
     }
 
-    /* Animasi Love dan Star */
-    .love, .star {
+    .love {
       display: inline-block;
       font-size: 20px;
       margin: 5px;
-    }
-
-    .love {
       animation: beat 1s infinite;
       color: #e91e63;
-    }
-
-    .star {
-      animation: shine 1.5s infinite;
-      color: #ffc107;
     }
 
     @keyframes beat {
       0%, 100% { transform: scale(1); }
       50% { transform: scale(1.3); }
     }
-
-    @keyframes shine {
-      0% { opacity: 0.3; transform: scale(1); }
-      50% { opacity: 1; transform: scale(1.2); }
-      100% { opacity: 0.3; transform: scale(1); }
-    }
   </style>
 </head>
 <body>
   <!-- Header -->
   <header>
-    <h1>
-      My To-Do List <span class="love">💖</span>
-    </h1>
-    <p>Keep track of your daily tasks and plans</p>
+    <img src="https://i.pinimg.com/736x/82/b0/dc/82b0dce93501fe96d9b7398f9a4edd93.jpg" alt="Cute Bunny" class="bunny-img" />
+    <div class="header-content">
+      <h1>My To-Do List <span class="love">💖</span></h1>
+      <p>Keep track of your daily tasks and plans</p>
+    </div>
+    <img src="https://i.pinimg.com/736x/56/f9/59/56f9590eb51a071e38a95c1c234284d2.jpg" alt="Cute rabbit" class="rabbit-img" />
   </header>
 
   <!-- Main content -->
@@ -104,7 +117,6 @@
     <span class="love">💕</span>
     <span class="love">💕</span>
     <span class="love">💕</span>
-    
   </footer>
 
   <script>
@@ -114,14 +126,12 @@
     const addJamButton = document.getElementById('addJamBtn');
     const taskList = document.getElementById('taskList');
 
-    // Load tasks from local storage
     function loadTasks() {
       document.body.style.backgroundColor = '#fce4ec';
       const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
       tasks.forEach(task => addTaskToDOM(task.item, task.time));
     }
 
-    // Save tasks to local storage
     function saveTasks() {
       const tasks = Array.from(taskList.children).map(item => ({
         item: item.querySelector('.task-info').textContent,
@@ -130,7 +140,6 @@
       localStorage.setItem('tasks', JSON.stringify(tasks));
     }
 
-    // Add task to DOM
     function addTaskToDOM(taskText, taskTime) {
       const li = document.createElement('li');
 
@@ -155,7 +164,6 @@
       taskList.appendChild(li);
     }
 
-    // Add task event
     addTaskButton.onclick = () => {
       const task = taskInput.value.trim();
       const time = timeInput.value.trim();
@@ -167,7 +175,6 @@
       }
     };
 
-    // Add Jam (Time) event
     addJamButton.onclick = () => {
       const task = taskInput.value.trim();
       const time = timeInput.value.trim();
@@ -179,7 +186,6 @@
       }
     };
 
-    // Initialize
     loadTasks();
   </script>
 </body>
